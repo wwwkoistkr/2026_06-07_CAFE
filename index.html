@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html class="light" lang="ko">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>슬로우 브류 카페 (Slow Brew Cafe)</title>
+  
+  <!-- Tailwind CSS Play CDN & Plugins -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <!-- Font and Icon Integrations -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+  <!-- Google Material Custom Theme Config for Tailwind Play CDN -->
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-tertiary-fixed-variant": "#474835",
+            "surface-container-highest": "#e2e2e2",
+            "surface-bright": "#f9f9f9",
+            "on-secondary-fixed-variant": "#4c4827",
+            "on-primary-container": "#aa9084",
+            "on-error-container": "#93000a",
+            "primary-fixed": "#fbdcce",
+            "error": "#ba1a1a",
+            "on-primary-fixed": "#281810",
+            "secondary-container": "#ebe4b7",
+            "background": "#f9f9f9",
+            "surface-container-low": "#f3f3f3",
+            "error-container": "#ffdad6",
+            "surface-tint": "#705a4f",
+            "secondary": "#645f3c",
+            "on-tertiary": "#ffffff",
+            "on-tertiary-fixed": "#1b1d0d",
+            "on-tertiary-container": "#969780",
+            "surface-container-lowest": "#ffffff",
+            "tertiary-container": "#2e2f1e",
+            "tertiary": "#191a0b",
+            "on-primary": "#ffffff",
+            "primary-container": "#3c2a21",
+            "on-surface-variant": "#4f4540",
+            "on-error": "#ffffff",
+            "on-secondary-fixed": "#1f1c02",
+            "inverse-surface": "#2f3131",
+            "inverse-primary": "#dec1b3",
+            "on-surface": "#1a1c1c",
+            "outline": "#81756f",
+            "surface-container-high": "#e8e8e8",
+            "on-background": "#1a1c1c",
+            "primary": "#25160e",
+            "inverse-on-surface": "#f1f1f1",
+            "surface-dim": "#dadada",
+            "secondary-fixed": "#ebe4b7",
+            "surface": "#f9f9f9",
+            "primary-fixed-dim": "#dec1b3",
+            "surface-container": "#eeeeee",
+            "secondary-fixed-dim": "#cec79d",
+            "tertiary-fixed": "#e4e4ca",
+            "outline-variant": "#d3c3bd",
+            "surface-variant": "#e2e2e2",
+            "on-secondary": "#ffffff",
+            "on-secondary-container": "#6a6542",
+            "tertiary-fixed-dim": "#c8c8af",
+            "on-primary-fixed-variant": "#574238"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "2xl": "1rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "margin-desktop": "64px",
+            "stack-md": "16px",
+            "gutter": "24px",
+            "container-max": "1200px",
+            "section-gap": "80px",
+            "margin-mobile": "20px",
+            "stack-lg": "32px",
+            "unit": "8px",
+            "stack-sm": "8px"
+          },
+          fontFamily: {
+            "sans": ["'Work Sans'", "sans-serif"],
+            "serif": ["'EB Garamond'", "serif"]
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Premium custom animation configurations */
+    .ebGaramond { font-family: 'EB Garamond', serif; }
+    .workSans { font-family: 'Work Sans', sans-serif; }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Core structural layout overrides for perfect dark / light themes transition */
+    body {
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+
+    /* Smooth anims */
+    .animate-fade-in {
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+    .animate-slide-down {
+      animation: slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideDown {
+      from { transform: translate(-50%, -100%); opacity: 0; }
+      to { transform: translate(-50%, 0); opacity: 1; }
+    }
+  </style>
+</head>
+<body id="home" class="bg-background text-on-background antialiased selection:bg-secondary-container selection:text-on-secondary-container font-sans">
+
+  <!-- Floating Navigation Bar -->
+  <nav class="bg-background/80 dark:bg-background/90 backdrop-blur-md transition-all duration-300 ease-in-out w-full sticky top-0 z-50 border-b border-outline-variant/20">
+    <div class="max-w-container-max mx-auto flex justify-between items-center px-margin-mobile md:px-margin-desktop py-stack-md">
+      <!-- Logo Title -->
+      <a class="font-serif text-2xl font-bold text-primary dark:text-primary-fixed-dim tracking-tight inline-flex items-center gap-2" href="#home">
+        <span>슬로우 브류 카페</span>
+      </a>
+      
+      <!-- Desktop Links -->
+      <div class="hidden md:flex gap-8 items-center text-sm font-medium">
+        <a class="nav-link text-primary font-medium border-b border-primary pb-1 hover:opacity-80 transition-opacity" href="#home">홈</a>
+        <a class="nav-link text-on-surface-variant hover:text-primary transition-colors dark:text-on-primary-container" href="#menu">메뉴</a>
+        <a class="nav-link text-on-surface-variant hover:text-primary transition-colors dark:text-on-primary-container" href="#about">브랜드 스토리</a>
+        <a class="nav-link text-on-surface-variant hover:text-primary transition-colors dark:text-on-primary-container" href="#find-us">오시는 길</a>
+      </div>
+      
+      <!-- Actions Block -->
+      <div class="hidden md:flex gap-4 items-center">
+        <!-- Live reservation record viewer trigger -->
+        <button id="view-reservations-btn" class="relative text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-container" title="내 예약 목록 보기">
+          <span class="material-symbols-outlined">event_note</span>
+          <span class="reservations-count-badge hidden absolute -top-1 -right-1 bg-error text-on-error text-[10px] w-5 h-5 font-bold rounded-full flex items-center justify-center border-2 border-background">0</span>
+        </button>
+
+        <!-- Dark/Light Theme Customizer -->
+        <button id="theme-toggle-btn" class="text-on-surface-variant hover:text-primary transition-all p-2 rounded-full hover:bg-surface-container" title="테마 변경">
+          <span class="material-symbols-outlined">dark_mode</span>
+        </button>
+
+        <!-- Dynamic Reservation Trigger Button -->
+        <button class="booking-trigger-btn bg-primary-container text-on-primary px-6 py-2.5 text-xs font-semibold tracking-wider rounded-sm hover:opacity-90 transition-opacity uppercase">
+          방문하기
+        </button>
+      </div>
+
+      <!-- Mobile Button Grid -->
+      <div class="flex items-center gap-2 md:hidden">
+        <button id="theme-toggle-mobile-btn" class="text-on-surface-variant p-2 rounded-full" title="테마 변경">
+          <span class="material-symbols-outlined">dark_mode</span>
+        </button>
+        <button id="mobile-menu-btn" class="text-primary p-2">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden bg-background border-t border-outline-variant/30 py-4 px-margin-mobile flex flex-col gap-4 animate-fade-in shadow-lg">
+      <a class="nav-link text-primary font-semibold block py-1" href="#home">홈</a>
+      <a class="nav-link text-on-surface-variant block py-1" href="#menu">메뉴</a>
+      <a class="nav-link text-on-surface-variant block py-1" href="#about">브랜드 스토리</a>
+      <a class="nav-link text-on-surface-variant block py-1" href="#find-us">오시는 길</a>
+      <div class="h-[1px] bg-outline-variant/30 my-2"></div>
+      <div class="flex flex-col gap-3">
+        <button class="booking-trigger-btn bg-primary-container text-on-primary w-full py-3 text-xs font-bold tracking-wider rounded text-center">
+          방문하기 (예약)
+        </button>
+        <button class="w-full text-center flex items-center justify-center gap-2 text-on-surface-variant py-2 hover:bg-surface-container rounded" onclick="document.getElementById('view-reservations-btn').click()">
+          <span class="material-symbols-outlined text-[18px]">event_note</span>
+          내 예약 현황 보기
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Alert Container for Smooth JS Toasts -->
+  <div id="reservation-alert-container"></div>
+
+  <!-- Hero Banner Header Section -->
+  <header class="relative w-full h-[85vh] flex items-center justify-center overflow-hidden bg-primary-container">
+    <div class="absolute inset-0 bg-black/35 z-10 transition-colors duration-400"></div>
+    <img alt="세련되고 햇살 가득한 카페 공간. 따뜻한 베이지색 벽등과 내추럴 오크우드 가구, 부드러운 린넨 커튼 사이로 아침 햇살이 가득 내리고 테이블 위 김이 모락모락 피어 오르는 은은한 라떼가 감수성 깊게 연출된 프로페셔널 힐링 카페 공간 이미지." 
+         class="absolute inset-0 w-full h-full object-cover select-none transition-transform duration-1000 scale-[1.01]" 
+         src="https://lh3.googleusercontent.com/aida/AP1WRLv9F7iF9rPOsj77EPEsY0chYVryiqw16L8ueAesp_qSkT8YeTlvmQnctu8Fl4PEYgAhPZzda5PZy_s_YAQZrFqMw938T22GDu4KiXkOmX3Zlj9McOa10ZXOceHHeaGUo7Ou1Txv7KtiLqwbkigOMcWCCra1c8zCY23GZtYImrMGRH9GXwWJ6ibF82tg5njC14pK41u3t0ARPywjZD3z0HfGWDxAigvPQB2viy4_FzzfpkYku4KZjkoW_Zc"
+         referrerpolicy="no-referrer"/>
+    
+    <div class="relative z-20 text-center max-w-3xl px-margin-mobile md:px-0 flex flex-col items-center">
+      <span class="text-secondary-container bg-primary-container/40 border border-secondary-container/30 text-xs font-bold tracking-[0.25em] py-1.5 px-4 mb-6 rounded-full inline-block backdrop-blur-md animate-fade-in uppercase">
+        Artisanal Coffee & Tea Space
+      </span>
+      <h1 class="font-serif text-4xl md:text-6xl text-on-primary mb-6 leading-tight select-none tracking-tight">
+        한 잔의 커피, 온전한 휴식
+      </h1>
+      <p class="font-sans text-base md:text-xl text-on-primary/90 mb-10 max-w-xl mx-auto leading-relaxed font-light">
+        차분함을 위해 정교하게 설계된 공간에서 슬로우 로스터리 방식의 특별한 커피 철학과 향긋한 유기농 티를 함께 경험해 보세요.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 items-center">
+        <a class="bg-primary-container text-on-primary font-semibold text-xs tracking-wider px-8 py-4 rounded-sm hover:translate-y-[-2px] hover:shadow-lg transition-all ease-out inline-block min-w-[160px] uppercase border border-outline/30" href="#menu">
+          메뉴 보기
+        </a>
+        <button class="booking-trigger-btn bg-white/15 hover:bg-white/25 text-on-primary border border-white/30 backdrop-blur-sm font-semibold text-xs tracking-wider px-8 py-4 rounded-sm hover:translate-y-[-2px] transition-all inline-block min-w-[160px] uppercase">
+          방문하기
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Interactive Brand Story Slider Section -->
+  <section id="about" class="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface-container-low transition-colors duration-400">
+    <div class="max-w-container-max mx-auto">
+      
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <span class="text-outline text-xs tracking-[0.2em] font-bold uppercase block mb-2">Our Philosopyl</span>
+        <h2 class="font-serif text-3xl md:text-4xl text-primary dark:text-primary-fixed-dim select-none">슬로우 브류 스토리</h2>
+        <div class="w-12 h-[1px] bg-outline mx-auto mt-4"></div>
+      </div>
+
+      <!-- Carousel Interface Box -->
+      <div class="relative max-w-4xl mx-auto bg-surface-container-lowest border border-outline-variant/30 rounded-lg p-6 md:p-12 shadow-[0_4px_30px_rgba(60,42,33,0.02)] min-h-[440px] md:min-h-[380px] flex flex-col justify-between">
+        
+        <!-- Stories Wrapper -->
+        <div id="story-slider-container">
+          <!-- Slide 1 -->
+          <div class="story-slide flex flex-col md:flex-row gap-8 items-center justify-center">
+            <div class="text-5xl md:text-7xl opacity-95 flex-shrink-0 select-none">🔥</div>
+            <div class="flex-grow text-center md:text-left">
+              <span class="text-[11px] font-bold tracking-widest text-secondary block mb-1 uppercase">Step 01. Slow Roasting</span>
+              <h3 class="font-serif text-2xl text-primary dark:text-primary-fixed-dim font-bold mb-3">느림의 미학으로 구워내는 원두</h3>
+              <p class="text-on-surface-variant leading-relaxed text-sm md:text-base font-light">
+                슬로우 브류 카페의 원두는 시간과 타협하지 않습니다. 일반적인 가열 방식보다 불의 결을 천천히 유도하여 생두 내부 깊숙한 지점까지 균일하게 열을 투입합니다. 이 정교한 슬로우 로스팅 과정은 쓴맛을 줄이고 조화로운 오가닉 단맛을 원숙하게 이끌어냅니다.
+              </p>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="story-slide hidden opacity-0 flex-col md:flex-row gap-8 items-center justify-center">
+            <div class="text-5xl md:text-7xl opacity-95 flex-shrink-0 select-none">☕</div>
+            <div class="flex-grow text-center md:text-left">
+              <span class="text-[11px] font-bold tracking-widest text-secondary block mb-1 uppercase">Step 02. Soft Brewing</span>
+              <h3 class="font-serif text-2xl text-primary dark:text-primary-fixed-dim font-bold mb-3">한 방울마다 담아내는 장인의 온정</h3>
+              <p class="text-on-surface-variant leading-relaxed text-sm md:text-base font-light">
+                숙련된 바리스타가 매일 기온과 습도에 맞춰 핸드드립 물 온도를 고정합니다. 원두가 가진 꽃과 과일, 너츠의 진솔한 아로마가 물길을 통해 순수한 컵으로 재탄생될 수 있도록, 아주 차분하게 정성을 다해 한 땀 한 땀 내립니다.
+              </p>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="story-slide hidden opacity-0 flex-col md:flex-row gap-8 items-center justify-center">
+            <div class="text-5xl md:text-7xl opacity-95 flex-shrink-0 select-none">🍃</div>
+            <div class="flex-grow text-center md:text-left">
+              <span class="text-[11px] font-bold tracking-widest text-secondary block mb-1 uppercase">Step 03. Peaceful Mind</span>
+              <h3 class="font-serif text-2xl text-primary dark:text-primary-fixed-dim font-bold mb-3 font-medium">쉼을 위해 남겨진 여백의 공간</h3>
+              <p class="text-on-surface-variant leading-relaxed text-sm md:text-base font-light">
+                우리는 빠름이 미덕인 도심 속 한가운데에서 슬로우 라이프스타일을 대변하는 보금자리가 되고자 합니다. 차분한 베이지색 벽등, 따스한 오크 가구, 시선을 사로잡는 보태니컬 식물들이 조화를 이루어, 당신이 조용히 서재처럼 쉬어갈 수 있도록 돕습니다.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slider controls -->
+        <div class="flex items-center justify-between border-t border-surface-container-low pt-6 mt-8">
+          <button id="story-prev-btn" class="w-10 h-10 rounded-full border border-outline-variant hover:bg-surface-container flex items-center justify-center text-primary transition-colors cursor-pointer" title="이전">
+            <span class="material-symbols-outlined text-[20px]">chevron_left</span>
+          </button>
+          
+          <!-- Indicators dots -->
+          <div id="story-indicators" class="flex gap-2"></div>
+
+          <button id="story-next-btn" class="w-10 h-10 rounded-full border border-outline-variant hover:bg-surface-container flex items-center justify-center text-primary transition-colors cursor-pointer" title="다음">
+            <span class="material-symbols-outlined text-[20px]">chevron_right</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Interactive Searchable & Filterable Menu Section -->
+  <section id="menu" class="py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+    
+    <!-- Section Header Column -->
+    <div class="text-center mb-12">
+      <span class="text-outline text-xs tracking-[0.2em] font-bold uppercase block mb-2">Our Handcrafted Menu</span>
+      <h2 class="font-serif text-3xl md:text-4xl text-primary dark:text-primary-fixed-dim select-none">우리의 메뉴</h2>
+      <div class="w-12 h-[1px] bg-outline mx-auto mt-4"></div>
+    </div>
+
+    <!-- Active Filters & Dynamic Realtime Search Inputs -->
+    <div class="flex flex-col md:flex-row gap-4 justify-between items-center mb-10 bg-surface-container-low/50 dark:bg-surface-container-lowest/50 border border-outline-variant/30 p-4 rounded-lg">
+      
+      <!-- Filter Tabs Container -->
+      <div class="flex flex-wrap gap-2 justify-center w-full md:w-auto">
+        <button data-category="all" class="menu-filter-btn px-4 py-2 text-xs font-semibold tracking-wider rounded bg-primary-container text-on-primary shadow-sm transition-all duration-200">
+          전체보기
+        </button>
+        <button data-category="coffee" class="menu-filter-btn px-4 py-2 text-xs font-semibold tracking-wider rounded bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high transition-all duration-200">
+          커피 (Coffee)
+        </button>
+        <button data-category="tea" class="menu-filter-btn px-4 py-2 text-xs font-semibold tracking-wider rounded bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high transition-all duration-200">
+          티 (Tea)
+        </button>
+        <button data-category="bites" class="menu-filter-btn px-4 py-2 text-xs font-semibold tracking-wider rounded bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high transition-all duration-200">
+          간단한 먹거리 (Bites)
+        </button>
+      </div>
+
+      <!-- Live Search Box -->
+      <div class="relative w-full md:w-80">
+        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+        <input id="menu-search" class="w-full bg-background dark:bg-surface text-on-background border border-outline-variant focus:border-outline focus:ring-0 rounded pl-10 pr-10 py-2.5 text-xs font-medium placeholder:text-outline-variant" placeholder="메뉴 이름, 원두 노트, 해시태그 검색..." type="text" />
+        <button id="clear-search-btn" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-outline hover:text-primary transition-colors cursor-pointer" title="검색어 초기화">
+          <span class="material-symbols-outlined text-[16px]">cancel</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Dynamic Menu Grid Output -->
+    <div id="menu-items-grid" class="transition-all duration-300">
+      <!-- Injected dynamically via js/menu.js -->
+    </div>
+
+  </section>
+
+  <!-- Guest Testimonials / Atmosphere Reviews -->
+  <section class="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface-container-low/50 border-t border-b border-outline-variant/20 transition-colors duration-400">
+    <div class="max-w-container-max mx-auto">
+      
+      <!-- Section Header -->
+      <div class="text-center mb-12">
+        <span class="text-outline text-xs tracking-[0.2em] font-bold uppercase block mb-2">Visitor Moments</span>
+        <h2 class="font-serif text-3xl text-primary dark:text-primary-fixed-dim select-none">쉼을 먼저 경험한 사람들의 이야기</h2>
+        <div class="w-12 h-[1px] bg-outline mx-auto mt-4"></div>
+      </div>
+
+      <!-- Bento Review Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mt-8">
+        
+        <div class="bg-surface-container-lowest p-6 rounded border border-outline-variant/20 shadow-[0_4px_24px_rgba(60,42,33,0.01)] flex flex-col justify-between">
+          <p class="text-on-surface-variant font-light text-sm leading-relaxed italic">
+            "드립 커피를 주문하고 커피가 은은하게 내려질 때까지 매장의 우드 향기를 즐기는 그 짧은 시간이 정말 최고의 힐링이었어요. 시끄러운 스마트폰 소음에서 해방되는 기분을 느끼고 싶을 때 매주 찾고 싶습니다."
+          </p>
+          <div class="flex items-center gap-3 border-t border-surface-container/60 pt-4 mt-4">
+            <span class="text-xl">🤵</span>
+            <div>
+              <h5 class="font-semibold text-xs text-primary dark:text-primary-fixed-dim">장 민 우 님</h5>
+              <p class="text-[10px] text-outline">사이버보안 개발자, 단골 손님</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-surface-container-lowest p-6 rounded border border-outline-variant/20 shadow-[0_4px_24px_rgba(60,42,33,0.01)] flex flex-col justify-between">
+          <p class="text-on-surface-variant font-light text-sm leading-relaxed italic">
+            "세레모니얼 말차를 시켜 마시는데, 정말 일본 고전 찻집에서 마셨던 고급스럽고 섬세한 격불 차의 향 그대로였어요. 조용히 개인 일기를 쓸 수 있게 자리가 멀리 떨어진 테이블 디자인도 극도로 마음에 듭니다."
+          </p>
+          <div class="flex items-center gap-3 border-t border-surface-container/60 pt-4 mt-4">
+            <span class="text-xl">👩</span>
+            <div>
+              <h5 class="font-semibold text-xs text-primary dark:text-primary-fixed-dim">이 서 윤 님</h5>
+              <p class="text-[10px] text-outline">일러스트 아티스트</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-surface-container-lowest p-6 rounded border border-outline-variant/20 shadow-[0_4px_24px_rgba(60,42,33,0.01)] flex flex-col justify-between">
+          <p class="text-on-surface-variant font-light text-sm leading-relaxed italic">
+            "아보카도 토스트와 슬로우 드립은 완벽한 조합입니다. 건강하고 바삭하며 간이 과하지 않아 몸이 정화되는 기분이에요. 가림용 대나무 바구니 인테리어 및 정갈한 가죽 장식까지 디테일 마감이 훌륭하네요."
+          </p>
+          <div class="flex items-center gap-3 border-t border-surface-container/60 pt-4 mt-4">
+            <span class="text-xl">👔</span>
+            <div>
+              <h5 class="font-semibold text-xs text-primary dark:text-primary-fixed-dim">데이비드 김 님</h5>
+              <p class="text-[10px] text-outline">건축 디자이너</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Find Us & Contact Section -->
+  <section class="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface-container-low transition-colors duration-400" id="find-us">
+    <div class="max-w-container-max mx-auto flex flex-col md:flex-row gap-8 lg:gap-12 items-center">
+      
+      <!-- Descriptions Grid -->
+      <div class="w-full md:w-1/2 flex flex-col gap-6 pr-0 md:pr-12">
+        <div>
+          <span class="text-outline text-xs tracking-[0.2em] font-bold uppercase block mb-2">Reservation & Location</span>
+          <h2 class="font-serif text-3xl md:text-4xl text-primary dark:text-primary-fixed-dim mb-4 select-none">오시는 길</h2>
+          <p class="font-sans text-sm md:text-base text-on-surface-variant leading-relaxed">
+            도심의 번잡함을 살짝 빗겨간 곳, 골목 깊숙이 자리한 조용한 아늑함이 펼쳐집니다. 길모퉁이 고풍스러운 한옥과 신축 건물의 조화 사이로 슬로우 브류 카페의 대문이 활짝 열려 있습니다. 당신을 위해 차분히 정돈된 자리를 준비해 두었습니다.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-outline-variant/30 pt-6">
+          <div>
+            <h4 class="font-sans text-[11px] font-bold text-outline uppercase tracking-wider mb-1">매장 위치 및 주소</h4>
+            <p class="font-sans text-xs md:text-sm text-on-surface font-medium">
+              서울특별시 종로구 삼청로 123-45<br/>
+              (지하철 삼청동 골목 입구)
+            </p>
+          </div>
+          <div>
+            <h4 class="font-sans text-[11px] font-bold text-outline uppercase tracking-wider mb-1">영업 및 브레이크타임</h4>
+            <p class="font-sans text-xs md:text-sm text-on-surface font-medium">
+              월요일 - 금요일: 09:00 - 20:00<br/>
+              주말 및 공휴일: 10:00 - 21:00
+            </p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-4 mt-4">
+          <!-- Launch directions Modal Trigger -->
+          <button id="directions-trigger" class="flex items-center gap-2 text-primary dark:text-primary-fixed-dim font-bold text-xs pb-1 border-b border-primary hover:opacity-80 transition-opacity self-start cursor-pointer">
+            <span class="material-symbols-outlined text-[18px]">directions</span>
+            길 찾기 및 상세 안내
+          </button>
+          
+          <button class="booking-trigger-btn flex items-center gap-2 text-secondary font-bold text-xs pb-1 border-b border-secondary hover:opacity-80 transition-opacity self-start">
+            <span class="material-symbols-outlined text-[18px]">calendar_today</span>
+            방문 예약 신청하기
+          </button>
+        </div>
+      </div>
+
+      <!-- Sophisticated Interactive Map Representation -->
+      <div class="w-full md:w-1/2 h-[380px] rounded overflow-hidden relative shadow-[0_4px_30px_rgba(60,42,33,0.04)] border border-outline-variant/30 group">
+        <!-- Grayscale Aesthetic Map -->
+        <img alt="한화 삼청동 삼포길 주변 조용하고 잔잔한 도심 가로수와 카페의 오목조목한 한옥 지도가 얇은 갈색 라인과 크림색 톤으로 간결히 표현된 미니멀 그래픽 평면 지도 일러스트." 
+             class="w-full h-full object-cover grayscale opacity-90 transition-all duration-750 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-[1.02]" 
+             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvZHYSlSWHr0sbVLJxBoa0Hz2KqAFggaDKWowxPF4jqDg0HV3Z7mWxD5iteOcnyCgpWG5u1Nrj9PC1ga4iKb-DyNU3hc7jEYHdXgozFGhfZCTW_1VcX7hcxkQnNi-WACvRomGz6UZxYQCpB52eJKAtrL_z3d3MoeVoM6qDDWuDVkNaHlqZPXwHmxluhU0lUDWMpwdFrazfkxWsvu4UgpdywEAjNDSxGCIhKS1g0VuWPjmsFO0kE9FRti_Q6FsMDi7PxWj-CUo_tAjY"
+             referrerpolicy="no-referrer"/>
+        
+        <!-- Floating overlay guide card -->
+        <div class="absolute bottom-4 left-4 right-4 bg-background/95 dark:bg-background/95 backdrop-blur border border-outline-variant/30 rounded p-4 shadow-lg flex items-center justify-between transition-transform duration-300 translate-y-2 group-hover:translate-y-0">
+          <div>
+            <h5 class="font-serif font-bold text-xs text-primary dark:text-primary-fixed-dim">슬로우 브류 카페 삼청점</h5>
+            <p class="text-[10px] text-on-surface-variant mt-1">서울 종로구 삼청로 123-45 (발렛 주차 서비스 가능)</p>
+          </div>
+          <button onclick="document.getElementById('directions-trigger').click()" class="bg-primary text-on-primary text-[10px] font-bold px-3 py-1.5 rounded-sm hover:opacity-90 transition-opacity cursor-pointer">
+            지도 확장
+          </button>
+        </div>
+        <div class="absolute inset-0 bg-primary-container/5 pointer-events-none group-hover:bg-transparent transition-colors duration-500"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Editorial Brand Footer -->
+  <footer class="bg-surface-container-lowest/90 border-t border-outline-variant/20 py-12 px-margin-mobile md:px-margin-desktop transition-colors duration-400">
+    <div class="max-w-container-max mx-auto flex flex-col gap-8 md:gap-12">
+      
+      <!-- Top Grid row -->
+      <div class="flex flex-col md:flex-row justify-between items-start gap-8">
+        <div>
+          <h3 class="font-serif text-xl font-bold text-primary dark:text-primary-fixed-dim mb-3">슬로우 브류 카페</h3>
+          <p class="text-on-surface-variant max-w-sm text-xs md:text-sm font-light leading-relaxed">
+            우리는 도심 속 지친 현대인에게 로스팅 연기가 은은히 감도는 조용한 서가와 질 좋은 다원 싱글 오리진 티를 통해 심신의 온전한 복원을 제공합니다.
+          </p>
+        </div>
+        
+        <!-- Quick menus loops -->
+        <div class="flex flex-wrap gap-x-12 gap-y-6 text-xs text-on-surface-variant">
+          <div>
+            <h5 class="text-primary dark:text-primary-fixed-dim font-semibold tracking-wide mb-3 uppercase">Explore</h5>
+            <ul class="flex flex-col gap-2 font-light">
+              <li><a href="#home" class="hover:text-primary transition-colors">홈 화면</a></li>
+              <li><a href="#menu" class="hover:text-primary transition-colors">하우스 메뉴</a></li>
+              <li><a href="#about" class="hover:text-primary transition-colors">로스팅 철학</a></li>
+              <li><a href="#find-us" class="hover:text-primary transition-colors">방문 주소</a></li>
+            </ul>
+          </div>
+          <div>
+            <h5 class="text-primary dark:text-primary-fixed-dim font-semibold tracking-wide mb-3 uppercase">Customer Support</h5>
+            <ul class="flex flex-col gap-2 font-light">
+              <li><a href="#reserve-date" class="booking-trigger-btn hover:text-primary transition-colors">공간 대여 및 예약</a></li>
+              <li><a href="#" class="hover:text-primary transition-colors">단체 고객 대여 문의</a></li>
+              <li><a href="#" class="hover:text-primary transition-colors font-medium">지속 가능한 소싱 철학</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="h-[1px] bg-outline-variant/20"></div>
+
+      <!-- Base copyright lines -->
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-outline font-light">
+        <p>© 2026 슬로우 브류 카페. 휴식의 순전한 가치 보존을 위해 만들어졌습니다.</p>
+        <div class="flex gap-6">
+          <a class="hover:text-primary hover:underline transition-all" href="#">개인정보 처리방침</a>
+          <a class="hover:text-primary hover:underline transition-all" href="#">이용약관</a>
+          <a class="hover:text-primary hover:underline transition-all" href="#">지속 가능 보고서</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- INTERACTIVE MODAL 1: Dynamic Reservation Booking Form -->
+  <div id="booking-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm animate-fade-in">
+    <div class="bg-background border border-outline-variant/40 rounded-lg max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 md:p-8 relative flex flex-col gap-6 animate-slide-down">
+      
+      <!-- Close Button -->
+      <button id="close-booking-modal" class="absolute top-4 right-4 text-on-surface-variant hover:text-primary p-2 w-10 h-10 rounded-full hover:bg-surface-container flex items-center justify-center cursor-pointer" title="닫기">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
+      <div>
+        <span class="text-secondary text-[10px] font-bold tracking-[0.2em] uppercase block mb-1">Reservation</span>
+        <h3 class="font-serif text-2xl text-primary dark:text-primary-fixed-dim font-bold">공간 방문 예약 신청</h3>
+        <p class="text-on-surface-variant text-xs mt-1 font-light">삼청동의 평온한 공간, 당신만을 위한 가장 정온한 테이블을 미리 선점해 보세요.</p>
+      </div>
+
+      <form id="booking-form" class="flex flex-col gap-4">
+        
+        <!-- Row: Name and phone -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="flex flex-col gap-1.5">
+            <label for="reserve-name" class="text-xs font-semibold text-on-surface-variant">예약자 성함 *</label>
+            <input id="reserve-name" required class="w-full bg-surface border border-outline-variant focus:border-outline focus:ring-0 rounded p-2.5 text-xs text-on-background" placeholder="홍길동" type="text" />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label for="reserve-phone" class="text-xs font-semibold text-on-surface-variant">연락처 *</label>
+            <input id="reserve-phone" required class="w-full bg-surface border border-outline-variant focus:border-outline focus:ring-0 rounded p-2.5 text-xs text-on-background" placeholder="010-1234-5678" type="tel" />
+          </div>
+        </div>
+
+        <!-- Row: Date and Time -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="flex flex-col gap-1.5">
+            <label for="reserve-date" class="text-xs font-semibold text-on-surface-variant">방문 희망 일자 *</label>
+            <input id="reserve-date" required class="w-full bg-surface border border-outline-variant focus:border-outline focus:ring-0 rounded p-2.5 text-xs text-on-background" type="date" />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label for="reserve-time" class="text-xs font-semibold text-on-surface-variant">희망 방문 시간 *</label>
+            <select id="reserve-time" required class="w-full bg-surface border border-outline-variant focus:border-outline focus:ring-0 rounded p-2.5 text-xs text-on-background">
+              <option value="09:00">09:00 (오전)</option>
+              <option value="10:30">10:30 (오전)</option>
+              <option value="12:00">12:00 (오후)</option>
+              <option value="13:30">13:30 (오후)</option>
+              <option value="15:00" selected>15:00 (오후)</option>
+              <option value="16:30">16:30 (오후)</option>
+              <option value="18:00">18:00 (저녁)</option>
+              <option value="19:30">19:30 (저녁 - 주말만)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Row: Party Count & Space Type -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="flex flex-col gap-1.5">
+            <label for="reserve-guests" class="text-xs font-semibold text-on-surface-variant">동반 동석 인원</label>
+            <select id="reserve-guests" class="w-full bg-surface border border-outline-variant focus:border-outline focus:ring-0 rounded p-2.5 text-xs text-on-background">
+              <option value="1">1인 (개인 서가 테이블)</option>
+              <option value="2" selected>2인 (기본 오크 테이블)</option>
+              <option value="3">3인 (창가 소파 공간)</option>
+              <option value="4">4인 (프라이빗 다실룸)</option>
+              <option value="5">5인 이상 (워크숍 선 정기대여 별도)</option>
+            </select>
+          </div>
+          
+          <div class="flex flex-col gap-1.5">
+            <span class="text-xs font-semibold text-on-surface-variant block mb-1">희망 공간 유형</span>
+            <div class="grid grid-cols-2 gap-2">
+              <label class="bg-surface border border-outline-variant hover:border-outline rounded p-2.5 flex items-center gap-2 cursor-pointer text-xs">
+                <input name="reserve-type" value="일반 테이블" checked class="text-primary focus:ring-0" type="radio" />
+                <span>일반 테이블</span>
+              </label>
+              <label class="bg-surface border border-outline-variant hover:border-outline rounded p-2.5 flex items-center gap-2 cursor-pointer text-xs">
+                <input name="reserve-type" value="창가 햇살석" class="text-primary focus:ring-0" type="radio" />
+                <span>창가 햇살석</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Special Request Note description -->
+        <div class="flex flex-col gap-1.5">
+          <label for="reserve-requests" class="text-xs font-semibold text-on-surface-variant">바리스타에게 남기실 말씀 (알레르기, 선호 원두타입 등)</label>
+          <textarea id="reserve-requests" class="w-full bg-surface border border-outline-variant focus:border-outline; focus:ring-0 rounded p-2.5 text-xs text-on-background h-20 placeholder:text-outline-variant" placeholder="예: 산미 있는 원두 추천 요청, 땅콩 알레르기 소지 등"></textarea>
+        </div>
+
+        <!-- Button actions block -->
+        <button type="submit" class="bg-primary text-on-primary font-semibold text-xs tracking-wider py-4 mt-2 rounded hover:opacity-90 transition-opacity uppercase cursor-pointer">
+          예약 접수하기
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE MODAL 2: Reservations List Manager viewer -->
+  <div id="reservations-list-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm animate-fade-in">
+    <div class="bg-background border border-outline-variant/40 rounded-lg max-w-lg w-full max-h-[80vh] overflow-y-auto shadow-2xl p-6 md:p-8 relative flex flex-col gap-6 animate-slide-down">
+      
+      <button id="close-list-modal" class="absolute top-4 right-4 text-on-surface-variant hover:text-primary p-2 w-10 h-10 rounded-full hover:bg-surface-container flex items-center justify-center cursor-pointer" title="닫기">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
+      <div>
+        <span class="text-secondary text-[10px] font-bold tracking-[0.2em] uppercase block mb-1">My Bookings</span>
+        <h3 class="font-serif text-2xl text-primary dark:text-primary-fixed-dim font-bold">내 예약 현황 관리</h3>
+        <p class="text-on-surface-variant text-xs mt-1 font-light">등록 완료된 소중한 예약 일정을 실시간으로 한눈에 보고 유연하게 관리해 보세요.</p>
+      </div>
+
+      <!-- Reservations entries wrapper -->
+      <div id="reservations-list-content">
+        <!-- Rendered dynamically of localStorage content via js/main.js -->
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- INTERACTIVE MODAL 3: Transport Routings Guided Guide -->
+  <div id="directions-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm animate-fade-in">
+    <div class="bg-background border border-outline-variant/40 rounded-lg max-w-lg w-full max-h-[85vh] overflow-y-auto shadow-2xl p-6 md:p-8 relative flex flex-col gap-6 animate-slide-down">
+      
+      <button id="close-directions-modal" class="absolute top-4 right-4 text-on-surface-variant hover:text-primary p-2 w-10 h-10 rounded-full hover:bg-surface-container flex items-center justify-center cursor-pointer" title="닫기">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
+      <div>
+        <span class="text-secondary text-[10px] font-bold tracking-[0.2em] uppercase block mb-1">Directions Guide</span>
+        <h3 class="font-serif text-2xl text-primary dark:text-primary-fixed-dim font-bold">오시는 길 상세 안내</h3>
+        <p class="text-on-surface-variant text-xs mt-1 font-light">삼청동 골목 입구에서 슬로우 브류 카페 삼청동점까지 오시는 이동 수단별 가장 편리한 경로입니다.</p>
+      </div>
+
+      <!-- Routings transport type tabs button toggle -->
+      <div class="flex border-b border-outline-variant/30 text-xs font-semibold">
+        <button data-mode="subway" class="transport-tab-btn flex-1 py-3 text-center border-b-2 border-primary text-primary font-semibold cursor-pointer">지하철 + 도보</button>
+        <button data-mode="car" class="transport-tab-btn flex-1 py-3 text-center text-on-surface-variant hover:text-primary cursor-pointer">자가용 / 주차</button>
+        <button data-mode="bus" class="transport-tab-btn flex-1 py-3 text-center text-on-surface-variant hover:text-primary cursor-pointer">시내 버스</button>
+      </div>
+
+      <!-- Tab content panels -->
+      <div id="transport-tab-contents" class="text-xs leading-relaxed text-on-surface-variant">
+        
+        <!-- Subway Path Panel -->
+        <div id="route-subway" class="transport-content flex flex-col gap-4">
+          <div class="bg-surface-container-low p-3 rounded flex items-center gap-3">
+            <span class="text-xl">🚇</span>
+            <div>
+              <strong class="text-primary block font-medium">안국역(3호선) 이용 시 (가장 추천)</strong>
+              <span>안국역 1번 출구에서 나와 삼청동 카페거리 방면 도보 12분</span>
+            </div>
+          </div>
+          <div class="flex flex-col gap-4 font-light pl-2 border-l-2 border-outline/30">
+            <div>
+              <span class="bg-primary text-on-primary text-[10px] font-bold px-1.5 py-0.5 rounded-sm mr-2">Step 1</span>
+              <span>안국역 1번 출구에서 우회전하여 감고당길(덕성여고 사윗길)로 집입합니다.</span>
+            </div>
+            <div>
+              <span class="bg-primary text-on-primary text-[10px] font-bold px-1.5 py-0.5 rounded-sm mr-2">Step 2</span>
+              <span>삼청동 지구대 방면으로 큰길을 따라 삼청동길 초입까지 300m 직진합니다.</span>
+            </div>
+            <div>
+              <span class="bg-primary text-on-primary text-[10px] font-bold px-1.5 py-0.5 rounded-sm mr-2">Step 3</span>
+              <span>고운 한복 대여점 건물에서 좌측 한옥 골목길 안쪽으로 20m 들어오시면 나무 대문이 보입니다.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Car Parking Guide Node -->
+        <div id="route-car" class="transport-content hidden flex flex-col gap-4">
+          <div class="bg-surface-container-low p-3 rounded flex items-center gap-3">
+            <span class="text-xl">🚗</span>
+            <div>
+              <strong class="text-primary block font-medium">네비게이션 및 주차 정보</strong>
+              <span>'슬로우 브류 카페 삼청점' 또는 '삼청로 123-45' 목적지 검색</span>
+            </div>
+          </div>
+          <div class="flex flex-col gap-3 font-light">
+            <p>
+              카페 골목 앞 전용 주차 가드레일에 도착하신 후 바리스타에게 전화를 주시면, <strong>안전한 유료 대리 발렛 파킹 연계 서비스</strong>(2시간 기준 4,000원 추가 서비스)를 대행 요청해 드립니다.
+            </p>
+            <p class="bg-secondary-container/30 text-on-secondary-container p-3 rounded-sm border border-secondary-container">
+              📍 <strong>주변 공영 주차장 안내:</strong><br/>
+              국립현대미술관 서울관 주차장 (도보 5분 거리, 시간당 3,000원) 이용 시 가장 안정적으로 쾌적하게 주차하실 수 있습니다.
+            </p>
+          </div>
+        </div>
+
+        <!-- Bus Panel Routings -->
+        <div id="route-bus" class="transport-content hidden flex flex-col gap-4">
+          <div class="bg-surface-container-low p-3 rounded flex items-center gap-3">
+            <span class="text-xl">🚌</span>
+            <div>
+              <strong class="text-primary block font-medium">마을 버스 / 지선 버스 정류장</strong>
+              <span>삼청파출소 앞 정류장 도보 2분</span>
+            </div>
+          </div>
+          <div class="flex flex-col gap-3 font-light pl-2 border-l-2 border-outline/30">
+            <div>
+              <strong class="text-primary block font-medium mb-1">지하철 안국역 / 은평 / 서대문 출발 시:</strong>
+              <span>종로 마을버스 <strong>종로11번</strong> 버스 탑승 후 <strong>'삼청파출소'</strong> 정류장 하차</span>
+            </div>
+            <div>
+              <strong class="text-primary block font-medium mb-1">시내 지선/간선 버스 이용 시:</strong>
+              <span><strong>109번, 151번, 162번, 172번, 272번</strong> 탑승 후 <strong>'덕성여중고'</strong> 정류장에서 하차, 도보 8분 진입</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Action Footer details -->
+      <div class="border-t border-outline-variant/30 pt-4 flex gap-2 justify-end">
+        <button onclick="window.print()" class="text-on-surface-variant hover:text-primary text-[10px] font-bold border border-outline-variant px-3 py-1.5 rounded-sm transition-colors flex items-center gap-1">
+          <span class="material-symbols-outlined text-xs">print</span>
+          안내 프린트하기
+        </button>
+        <button id="close-directions-action" onclick="document.getElementById('close-directions-modal').click()" class="bg-primary text-on-primary text-[10px] font-bold px-4 py-1.5 rounded-sm hover:opacity-95 transition-opacity cursor-pointer">
+          안내 종료
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Dynamic JS Core Script module loading -->
+  <script type="module" src="/js/main.js"></script>
+
+</body>
+</html>

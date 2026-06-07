@@ -1,0 +1,6 @@
+{
+  "name": "Slow Brew Cafe",
+  "description": "슬로우 브류 카페 - 한 잔의 커피, 온전한 휴식을 선사하는 고품격 정적 웹사이트",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
